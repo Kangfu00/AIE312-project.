@@ -1,62 +1,76 @@
 # Worddee.ai 📝✨
 
-**Worddee.ai** is a full-stack web application designed to help users practice English vocabulary and sentence construction. It features an interactive "Word of the Day" challenge and an AI-powered feedback system (Mock/n8n) to score grammar and provide suggestions.
+**Worddee.ai** คือเว็บแอปพลิเคชันแบบ Full-Stack สำหรับฝึกฝนคำศัพท์ภาษาอังกฤษและการแต่งประโยค โดยมีฟีเจอร์เด่นคือ "Word of the Day" ที่ท้าทายให้ผู้ใช้แต่งประโยคจากคำศัพท์ที่กำหนด และมีระบบ AI อัจฉริยะ (จำลอง/n8n) คอยตรวจสอบไวยากรณ์ ให้คะแนน และให้คำแนะนำเพื่อพัฒนาทักษะภาษา
 
-![Project Screenshot](./daily_vocab_web/public/screenshot.png) 
-*(Note: You can add a screenshot of your dashboard here)*
+## 🚀 ฟีเจอร์หลัก (Features)
 
-## 🚀 Features
+- **🎲 Word of the Day Challenge:** ระบบสุ่มคำศัพท์ประจำวัน พร้อมคำแปลและระดับความยาก (Beginner, Intermediate, Advanced)
+- **🤖 AI Scoring System:** ระบบตรวจประโยคด้วย AI วิเคราะห์ความถูกต้องของไวยากรณ์ ความหมาย และให้คะแนน (เต็ม 10) พร้อมประโยคตัวอย่างที่แก้ไขให้ถูกต้อง
+- **📊 Learner Dashboard:** หน้าแดชบอร์ดแสดงผลการเรียนรู้ สถิติการฝึกฝน คะแนนเฉลี่ย และกราฟแสดงพัฒนาการของผู้ใช้
+- **💾 Persistent History:** บันทึกประวัติการฝึกฝนทั้งหมดลงในฐานข้อมูล MySQL อย่างถาวร
 
-- **🎲 Word of the Day Challenge:** Fetches a random word with definition and difficulty level.
-- **🤖 AI Scoring System:** Analyzes user sentences for grammar and relevance, providing a score (0-10) and improved suggestions.
-- **📊 Learner Dashboard:** Visualizes learning progress, daily streaks, and proficiency distribution using charts.
-- **💾 Persistent History:** Saves all practice sessions to a MySQL database.
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
 
-## 🛠️ Tech Stack
-
-**Frontend:**
+**Frontend (ส่วนหน้าบ้าน):**
 - **Framework:** Next.js 14 (App Router)
-- **Styling:** Tailwind CSS (with PostCSS)
-- **Visualization:** Chart.js, React-Chartjs-2
+- **Styling:** Tailwind CSS (ร่วมกับ PostCSS)
+- **Visualization:** Chart.js, React-Chartjs-2 (สำหรับกราฟ)
 - **Language:** TypeScript
 
-**Backend:**
+**Backend (ส่วนหลังบ้าน):**
 - **Framework:** FastAPI (Python)
-- **Database:** MySQL (running in Docker)
+- **Database:** MySQL (รันบน Docker)
 - **ORM:** SQLAlchemy
 - **API Docs:** Swagger UI / OpenAPI
 
 **DevOps & Tools:**
 - **Containerization:** Docker & Docker Compose
-- **Workflow:** n8n (Integrated via Webhook logic)
+- **Workflow:** n8n (สำหรับจัดการ AI Workflow / Webhook)
 
 ---
 
-## ⚙️ System Architecture
+## ⚙️ สถาปัตยกรรมระบบ (System Architecture)
 
-1.  **Frontend (Next.js)** fetches a random word from **Backend (FastAPI)**.
-2.  User submits a sentence -> Frontend sends payload to Backend.
-3.  **FastAPI** processes the sentence (via `mock_ai_validation` or n8n webhook).
-4.  Result is saved to **MySQL Database**.
-5.  **Dashboard** fetches aggregated data (`/summary`) from Backend to display charts.
+1.  **Frontend (Next.js)** ส่งคำขอสุ่มคำศัพท์ไปที่ **Backend (FastAPI)**
+2.  ผู้ใช้พิมพ์ประโยคและกดส่ง -> Frontend ส่งข้อมูลไปตรวจสอบที่ Backend
+3.  **FastAPI** ประมวลผลประโยค (ผ่านฟังก์ชันจำลอง AI หรือ Webhook ของ n8n)
+4.  ผลลัพธ์การตรวจและคะแนนจะถูกบันทึกลง **MySQL Database**
+5.  **Dashboard** ดึงข้อมูลสรุปผล (`/api/summary`) จาก Backend เพื่อนำมาแสดงเป็นกราฟ
 
 ---
 
-## 🏁 Getting Started
+## 🏁 วิธีการติดตั้งและรันโปรเจกต์ (Getting Started)
 
-Follow these steps to set up the project locally.
+ทำตามขั้นตอนด้านล่างเพื่อรันโปรเจกต์ในเครื่องของคุณ
 
-### Prerequisites
-- Node.js (v18+)
-- Python (v3.9+)
+### สิ่งที่ต้องมี (Prerequisites)
+- Node.js (เวอร์ชัน 18 ขึ้นไป)
+- Python (เวอร์ชัน 3.9 ขึ้นไป)
 - Docker & Docker Compose
 
-### 1. Setup Backend (FastAPI + MySQL)
+### 1. ติดตั้งและรัน Backend (FastAPI + MySQL)
 
-Navigate to the API directory and start the services using Docker.
+เข้าไปที่โฟลเดอร์ `daily_vocab_api` และเริ่มระบบด้วย Docker
 
 ```bash
 cd daily_vocab_api
 
-# Build and start containers (FastAPI + MySQL + n8n)
+# สร้างและเริ่ม Containers (FastAPI + MySQL + n8n)
 docker-compose up -d --build
+API Server จะรันที่: http://localhost:8000
+
+คู่มือ API (Swagger UI): http://localhost:8000/docs
+
+2. ติดตั้งและรัน Frontend (Next.js)
+เปิด Terminal ใหม่ (ห้ามปิดอันเก่า) เข้าไปที่โฟลเดอร์ daily_vocab_web และติดตั้งแพ็กเกจ
+
+Bash
+
+cd daily_vocab_web
+
+# ติดตั้ง dependencies
+npm install
+
+# รันเซิร์ฟเวอร์สำหรับการพัฒนา
+npm run dev
+เข้าใช้งานเว็บไซต์ได้ที่: http://localhost:3000
