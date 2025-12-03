@@ -62,7 +62,7 @@ API Server จะรันที่: http://localhost:8000
 คู่มือ API (Swagger UI): http://localhost:8000/docs
 
 ```
-2. ติดตั้งและรัน Frontend (Next.js)
+### 2. ติดตั้งและรัน Frontend (Next.js)
 เปิด Terminal ใหม่ (ห้ามปิดอันเก่า) เข้าไปที่โฟลเดอร์ daily_vocab_web และติดตั้งแพ็กเกจ
 
 ```Bash
