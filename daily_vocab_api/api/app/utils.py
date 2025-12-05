@@ -3,7 +3,7 @@ import random
 
 # URL ของ n8n (ใน Docker เราเรียกผ่านชื่อ service "n8n" ได้เลย)
 # หมายเหตุ: ต้อง Activate Workflow ใน n8n ก่อน URL ถึงจะเป็น /webhook/ (ไม่มี -test)
-N8N_WEBHOOK_URL = "http://localhost:5678/webhook/validate-sentence"
+N8N_WEBHOOK_URL = "http://n8n:5678/webhook/validate-sentence"
 
 def mock_ai_validation(sentence: str, target_word: str, difficulty: str) -> dict:
     """
