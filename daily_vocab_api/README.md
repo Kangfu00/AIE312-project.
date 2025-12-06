@@ -370,3 +370,21 @@ def export_progress_pdf(user_id: int):
 **Made with ❤️ and ☕️ for Learner**
 [⬆ กลับไปด้านบน](#-vocabulary-practice-api-workshop)
 </div>
+
+### 3. ตั้งค่าระบบ AI (n8n Workflow) ⚙️
+
+เนื่องจาก n8n เริ่มต้นจะยังไม่มี Workflow คุณต้องเข้าไปตั้งค่าดังนี้:
+
+1.  เปิด Browser ไปที่: `http://localhost:5678`
+2.  สร้างบัญชี Owner account
+3.  สร้าง Workflow ใหม่ และเพิ่ม Node ดังนี้:
+    - **Webhook Node:**
+        - Method: `POST`
+        - Path: `validate-sentence`
+        - Respond: `Using 'Respond to Webhook' Node`
+    - **Code Node** (หรือ OpenAI Node):
+        - เขียน Logic สำหรับตรวจสอบประโยคและให้คะแนน
+    - **Respond to Webhook Node:**
+        - Respond With: `JSON`
+        - Response Body: `{{ $json }}` (หรือ Expression ที่ถูกต้อง)
+4.  **สำคัญ:** กดปุ่ม **Activate** (switch สีเขียวมุมขวาบน) เพื่อให้ระบบทำงานจริง
