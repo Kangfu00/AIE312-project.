@@ -108,7 +108,7 @@ export default function Home() {
                 {/* รูปภาพ */}
                 <div className="hidden md:block w-1/3 relative bg-gray-100">
                    <img 
-                     src="https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop" 
+                     src="https://www.spotlight.com/wp-content/uploads/2023/10/df25bb4b-e75d-4dbc-b7c2-34bb068e7221-2048x1366.jpeg" 
                      alt="Study Atmosphere"
                      className="absolute inset-0 w-full h-full object-cover"
                    />
